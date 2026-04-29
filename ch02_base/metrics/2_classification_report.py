@@ -21,7 +21,7 @@ model.fit(x_train, y_train)
 # 5.预测(测试)
 y_pred = model.predict(x_test)
 
-# 生成分类报告
+# 6.生成分类报告
 report = classification_report(y_test, y_pred)
 print(report)
 '''
@@ -34,3 +34,10 @@ print(report)
    macro avg       0.85      0.85      0.85       300
 weighted avg       0.85      0.85      0.85       300
 '''
+# 获取预测正类的概率值(0,1)
+y_pred_proba= model.predict_proba(x_test)[:,1]
+from sklearn.metrics import roc_auc_score
+# 计算 AUC的值
+roc_aoc= roc_auc_score(y_test, y_pred_proba)
+# 越接近1越准确
+print(roc_aoc) # 0.8968398595493133
